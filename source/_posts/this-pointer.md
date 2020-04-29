@@ -1,6 +1,6 @@
 # C++ this pointer
 在标准文档草案N4659中， this关键字的解释如下：
-1. 在非静态成员函数的函数体内，关键字this是一个预定义的表达式，它的值为调用该函数的对象的地址。(例如，在class X的非静态成员函数中，this的类型为X*)。如果成员函数被定义为const, volatile或者const volatile， 则对应的this 类型为const X*, volatile X* 或者 const volatile X*。
+1. 在非静态成员函数的函数体内，关键字this是一个预定义的表达式，它的值为调用该函数的对象的地址。(例如，在class X的非静态成员函数中，this的类型为X *)。如果成员函数被定义为const, volatile或者const volatile， 则对应的this 类型为const X *, volatile X *或者 const volatile X *。
 
 
 2. const 和 volatile 修饰符在存取对象及其非静态数据成员时生效。
