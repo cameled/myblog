@@ -8,55 +8,46 @@ mathjax: true
 
 # 1. 概述
 
-在[容器储水问题](https://leetcode.com/problems/container-with-most-water/)中，双指针法能够将计算复杂度降到{%mathjax%}O(n){%endmathjax%}。本文是对双指针法的有效性思考，即证明通过双指针法可以求得最大储水量。
+本文是对双指针法的有效性思考。
 
-假设当{%mathjax%}x{%endmathjax%}取{%mathjax%}x_a，x_b (a < b){%endmathjax%}时，储水量最大，即{%mathjax%}S_{max} = (x_b - x_a) * min(y_a， y_b){%endmathjax%}。
+在[容器储水问题](https://leetcode.com/problems/container-with-most-water/)中，双指针法能够将复杂度降到{%mathjax%}O(n){%endmathjax%}。
 
-由于{%mathjax%}min(y_a， y_b){%endmathjax%}的存在，{%mathjax%}S_{max}{%endmathjax%}分为两种情况：
+假设{%mathjax%}x{%endmathjax%}取{%mathjax%}a，b (a < b){%endmathjax%}，则{%mathjax%}a{%endmathjax%}和{%mathjax%}b{%endmathjax%}之间容器的储水量为:
 
-1. {% mathjax %}y_a < y_b {% endmathjax %}， 即{% mathjax %}S_{max} = (x_b - x_a) * y_a{% endmathjax %}
-2. {% mathjax %}y_a > y_b {% endmathjax %}， 即{% mathjax %}S_{max} = (x_b - x_a) * y_b{% endmathjax %}
+{%mathjax%}S(a， b) = (b - a) * min(y_a， y_b){%endmathjax%}
+
+由于{%mathjax%}min(y_a， y_b){%endmathjax%}的存在，{%mathjax%}S(a， b){%endmathjax%}分为两种情况：
+
+1. {% mathjax %}y_a < y_b {% endmathjax %}， 即{% mathjax %}S(a) = (b - a) * y_a{% endmathjax %}；
+2. {% mathjax %}y_a >= y_b {% endmathjax %}， 即{% mathjax %}S(b) = (b - a) * y_b{% endmathjax %}。
 
 # 2. {%mathjax%} y_a < y_b {%endmathjax%}
 
-当{%mathjax%}y_a < y_b{%endmathjax%}，{%mathjax%}y_a{%endmathjax%}为{%mathjax%}S_{max}{%endmathjax%}的有效值。此时容器的有效高度在左侧，即{%mathjax%}S_{max}{%endmathjax%}的有效高度由左侧指针产生。
+假设{%mathjax%}y_a < y_b (a<b){%endmathjax%}，此时容器的有效高度为{%mathjax%}y_a{%endmathjax%}，容器的储水量为：
 
-## 2.1 对左侧指针有效性的证明
+{%mathjax%}S(a) = (b - a) * y_a{%endmathjax%}
 
-对左侧指针有效性的证明分为两部分：
+令{%mathjax%}S_{max}(a){%endmathjax%}为{%mathjax%}{S(0), S(1), ..., S(a)}{%endmathjax%}中的最大值。
 
-1. {%mathjax%}x_i <= x_a{%endmathjax%}
-2. {%mathjax%}x_i > x_a{%endmathjax%}
+当{%mathjax%}a = 0{%endmathjax%}时，{%mathjax%} S(0)= (b - 0) * y_0{%endmathjax%}。
+如果存在{%mathjax%}m{%endmathjax%}，使得{%mathjax%}S(m) > S(0){%endmathjax%}，则{%mathjax%}m > 0{%endmathjax%}。
 
-### 2.1.1 {%mathjax%}i <= a{%endmathjax%}
+当{%mathjax%}a = n （0 < n < b){%endmathjax%}时，{%mathjax%}S(n) = (b - n) * y_n{%endmathjax%}。
+如果存在{%mathjax%}m{%endmathjax%}，使得{%mathjax%}S(m) > S_{max}(n){%endmathjax%}，则{%mathjax%}m > n{%endmathjax%}。
 
-当{%mathjax%}x_i <= x_a{%endmathjax%}时，令{%mathjax%}m = x_a - x_i (m >= 0){%endmathjax%}，
+# 3. {%mathjax%} y_a >= y_b {%endmathjax%}
 
-则{%mathjax%}S(i) = ((x_b - x_a) + m) * y_i{%endmathjax%}。
+假设{%mathjax%}y_a >= y_b (a<b){%endmathjax%}，此时容器的有效高度为{%mathjax%}y_b{%endmathjax%}，容器的储水量为：
 
-令{%mathjax%}w = x_b - x_a{%endmathjax%}，则{%mathjax%}S(i) = (w + m) * y_i{%endmathjax%};
+{%mathjax%}S(b) = (b - a) * y_b{%endmathjax%}
 
-又{%mathjax%}S(a){%endmathjax%}为容器储水最大值，则{%mathjax%}(w + m) * y_i < w * y_a{%endmathjax%}。
+令{%mathjax%}S_{max}(b){%endmathjax%}为{S(b), S(b+1), ..., S(x_{max})}中的最大值。
 
-上式展开：
+当{%mathjax%}b = x_{max}{%endmathjax%}时，{%mathjax%} S(x_{max})= (x_{max} - a) * y_0{%endmathjax%}。
+如果存在{%mathjax%}m{%endmathjax%}，使得{%mathjax%}S(m) > S(x_{max}){%endmathjax%}，则{%mathjax%}m < x_{max}{%endmathjax%}。
 
-{%mathjax%}(w + 0) * y_a = w * y_a{%endmathjax%}
-...
-{%mathjax%}(w + a) * y_0 < w * y_a{%endmathjax%}
+当{%mathjax%}b = n （0 < n < b){%endmathjax%}时，{%mathjax%}S(n) = (b - a) * y_n{%endmathjax%}。
+如果存在{%mathjax%}m{%endmathjax%}，使得{%mathjax%}S(m) > S_{max}(n){%endmathjax%}，则{%mathjax%}m < n{%endmathjax%}。
 
-由上述展开可知，当{%mathjax%}x{%endmathjax%}取{%mathjax%}i{%endmathjax%}时，如果存在{%mathjax%}S(k) > S(i){%endmathjax%}， 则{%mathjax%}k > i{%endmathjax%}。
-
-### 2.1.2 {%mathjax%}i > a{%endmathjax%}
-
-对于这种情况，说明{%mathjax%}S_{max}{%endmathjax%}左侧指针已经通过了{%mathjax%}x_a{%endmathjax%}处。
-
-### 2.1.3 总结
-
-当{%mathjax%}y_i < y_b{%endmathjax%}时，对于{%mathjax%}i{%endmathjax%}，总是能期望存在{%mathjax%}k > i{%endmathjax%}， 其中{%mathjax%}S(k){%endmathjax%}为容器最大储水量。
-
-## 2.2 {%mathjax%} y_a > y_b {%endmathjax%}
-
-当{%mathjax%}y_a > y_i{%endmathjax%}时，对于{%mathjax%}i{%endmathjax%}，总是能期望存在{%mathjax%}k < i{%endmathjax%}， 其中{%mathjax%}S(k){%endmathjax%}为容器最大储水量。
-
-# 3. 总结
-通过归纳法，证明了双指针法在解决容器储水问题中的有效性。
+# 4. 总结
+单调情况已经在2,3节中讨论完毕。剩下的问题是，如何将上述两种情况合并，得出最终结论。
