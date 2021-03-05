@@ -42,7 +42,7 @@ A = \lbrace{S(0, 1), S(0, 2), S(0, 3) ... S(0, n), S(1, 2), S(1, 3) ... S(1, n) 
 	当{%mathjax%}y_i < y_a{%endmathjax%}时， {%mathjax%}S(a, i) = (i - a) * y_b{%endmathjax%}，因为{%mathjax%}i < b{%endmathjax%}且{%mathjax%}y_i < y_a < y_b{%endmathjax%}，所以{%mathjax%}S(a, i) < S(a, b){%endmathjax%}。
 	所以{%mathjax%}S(a, b){%endmathjax%}为解集{%mathjax%}A_{(a,b)}{%endmathjax%}的最大值。
 
-例如，对于{%mathjax%}S(0, b){%endmathjax%}，当{%mathjax%}y_0 < y_b{%endmathjax%}时，由上述结论，我们可以知道{%mathjax%}\lbrace{S(0, 1), S(0, 2), S(0, 3) ... S(0, b)}\rbrace{%endmathjax%}的最大值为{%mathjax%}S(0, b){%endmathjax%}。
+例如，对于{%mathjax%}S(0, n){%endmathjax%}，当{%mathjax%}y_0 < y_n{%endmathjax%}时，由上述结论，我们可以知道{%mathjax%}\lbrace{S(0, 1), S(0, 2), S(0, 3) ... S(0, n)}\rbrace{%endmathjax%}的最大值为{%mathjax%}S(0, n){%endmathjax%}。
 
 通过上述分析，当{%mathjax%}y_a < y_b{%endmathjax%}时，我们可以移动左侧的指针，因为已经找到了与该指针相关的所有解的最大值。
 
